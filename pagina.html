@@ -5,46 +5,63 @@
 
 <head>
 	<title>Tarefas</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript">
+		
+		function inserir(){
+			document.getElementById("form").style.display = "block";
+		}
+
+	</script>
+
 </head>
 
 <body>
 	
 	<div align="center">
 		<h1>Lista de Tarefas</h1>
-		<a href="#">[Inserir Tarefa]</a>
+		<button onclick="inserir()">[Inserir Tarefa]</button>
 		<hr>
 	</div>
 	
+	<div id="form" style="display: none">
+		<form>
+			<label>TÃ­tulo:</label>
+			<input type="text" name="titulo">
+		</form>
+		<hr>
+	</div>
+
 	<div>
 		<table style="width:100%">
 	  		<tr style="background-color: #f1f1c1">
-			   <th align="left">Título</th>
-			   <th align="left">Descrição</th> 
-			   <th align="left">Responsável</th>
+			   <th align="left">TÃ­tulo</th>
+			   <th align="left">DescriÃ§Ã£o</th> 
+			   <th align="left">ResponsÃ¡vel</th>
 			   <th align="left">Prazo</th>
-			   <th align="left">Opções</th>
+			   <th align="left">OpÃ§Ãµes</th>
 		  	</tr>
 		  
 		  	<tr>
 				<td>Tarefa 1</td>
-				<td>Descrição 1</td> 
-				<td>Responsável 1</td>
+				<td>Descricao 1</td> 
+				<td>Responsavel 1</td>
 				<td>Prazo 1</td>
 				<td><a href="#">[Alterar]</a> - <a href="#">[Remover]</a></td>
 		  	</tr>
 		  
 		  	<tr>
 		    	<td>Tarefa 2</td>
-		    	<td>Descrição 2</td> 
-		    	<td>Responsável 2</td>
+		    	<td>Descricao 2</td> 
+		    	<td>Responsavel 2</td>
 		    	<td>Prazo 2</td>
 		    	<td><a href="#">[Alterar]</a> - <a href="#">[Remover]</a></td>
 		 	</tr>
 		  
 			<tr>
 			  	<td>Tarefa 3</td>
-			  	<td>Descrição 3</td> 
-			  	<td>Responsável 3</td>
+			  	<td>Descricao 3</td> 
+			  	<td>Responsavel 3</td>
 			  	<td>Prazo 3</td>
 			 	 <td><a href="#">[Alterar]</a> - <a href="#">[Remover]</a></td>
 			</tr>
