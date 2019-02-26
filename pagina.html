@@ -7,9 +7,54 @@
 	<title>Tarefas</title>
 	<meta charset="UTF-8">
 	<script type="text/javascript">
-		
+	
+		var tarefas = [];
+		var n_tarefas = 0;
+	
 		function inserir(){
 			document.getElementById("form").style.display = "block";
+		}
+		
+		function atualizar(){
+			var html = "<table style='width:100%'>"+
+					  		"<tr style='background-color: #f1f1c1'>"+
+							   "<th align='left'>Título</th>"+
+							   "<th align='left'>Descrição</th>"+ 
+							   "<th align='left'>Responsável</th>"+
+							   "<th align='left'>Prazo</th>"+
+							   "<th align='left'>Opções</th>"+
+						  	"</tr>";
+
+		  	for(var i = 0; i < tarefas.length; i++) {
+		  		var linha = "<tr>";
+		  		linha += "<td>" + tarefas[i]["titulo"] + "</td>";
+		  		linha += "<td>" + tarefas[i]["descricao"] + "</td>";
+		  		linha += "<td>" + tarefas[i]["responsavel"] + "</td>";
+		  		linha += "<td>" + tarefas[i]["prazo"] + "</td>";
+		  		linha += "<td><button>Alterar</button><button>Remover</button></td>";
+		  		linha += "</tr>";
+		  		html += linha;
+		  	}
+		  	html += "</table>"
+			
+			document.getElementById("conteudo").innerHTML = html;
+			
+		}
+		
+		function salvar(){
+			var t1 = document.getElementById("titulo").value;
+			var d1 = document.getElementById("descricao").value;
+			var r1 = document.getElementById("responsavel").value;
+			var p1 = document.getElementById("prazo").value;
+			
+			var tarefa = {titulo:t1, descricao:d1, responsavel:r1, prazo:p1};
+			
+			tarefas[n_tarefas] = tarefa;
+			n_tarefas++;
+			
+			atualizar();
+			
+			document.getElementById("form").style.display = "none";
 		}
 
 	</script>
@@ -20,53 +65,29 @@
 	
 	<div align="center">
 		<h1>Lista de Tarefas</h1>
-		<button onclick="inserir()">[Inserir Tarefa]</button>
+		<button onclick="inserir()">Nova Tarefa</button>
 		<hr>
 	</div>
 	
 	<div id="form" style="display: none">
-		<form>
-			<label>Título:</label>
-			<input type="text" name="titulo">
-		</form>
+		<label for="titulo">Título:</label>
+		<input type="text" id="titulo">
+		
+		<label for="descricao">Descrição:</label>
+		<input type="text" id="descricao">
+		
+		<label for="responsavel">Responsável:</label>
+		<input type="text" id="responsavel">
+		
+		<label for="prazo">Prazo:</label>
+		<input type="date" id="prazo">
+		
+		<button onclick="salvar()">Cadastrar</button>
 		<hr>
 	</div>
-
-	<div>
-		<table style="width:100%">
-	  		<tr style="background-color: #f1f1c1">
-			   <th align="left">Título</th>
-			   <th align="left">Descrição</th> 
-			   <th align="left">Responsável</th>
-			   <th align="left">Prazo</th>
-			   <th align="left">Opções</th>
-		  	</tr>
-		  
-		  	<tr>
-				<td>Tarefa 1</td>
-				<td>Descricao 1</td> 
-				<td>Responsavel 1</td>
-				<td>Prazo 1</td>
-				<td><a href="#">[Alterar]</a> - <a href="#">[Remover]</a></td>
-		  	</tr>
-		  
-		  	<tr>
-		    	<td>Tarefa 2</td>
-		    	<td>Descricao 2</td> 
-		    	<td>Responsavel 2</td>
-		    	<td>Prazo 2</td>
-		    	<td><a href="#">[Alterar]</a> - <a href="#">[Remover]</a></td>
-		 	</tr>
-		  
-			<tr>
-			  	<td>Tarefa 3</td>
-			  	<td>Descricao 3</td> 
-			  	<td>Responsavel 3</td>
-			  	<td>Prazo 3</td>
-			 	 <td><a href="#">[Alterar]</a> - <a href="#">[Remover]</a></td>
-			</tr>
-		  
-		</table>
+		
+	<div  id="conteudo">
+		<p>Nenhuma tarefa cadastrada!</p>
 	</div>
 
 	<div align="center">
