@@ -1,0 +1,36 @@
+<!-- Desenvolvido por Emanoel Dantas - 20170069630 -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Calculadora</title>
+	<meta charset="UTF-8">
+
+</head>
+
+<body>
+	
+	<div align="center">
+		<h1>Calculadora</h1>
+		<hr>
+	</div>
+	
+	<div align="center">
+		<input type="text" id="expressao">
+	
+		<button onclick="calcular()">Calcular</button>
+		<hr>
+	</div>
+
+	<script type="text/javascript">
+	
+		function calcular(){
+			var expressao = document.getElementById("expressao");
+			alert("Resultado: "+eval(expressao.value));
+		}
+
+	</script>
+	
+</body>
+</html>
