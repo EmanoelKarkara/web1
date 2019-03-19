@@ -6,6 +6,45 @@
 <head>
 	<title>Tarefas</title>
 	<meta charset="UTF-8">
+</head>
+
+<body>
+	
+	<div align="center">
+		<h1>Lista de Tarefas</h1>
+		<button onclick="inserir()">Nova Tarefa</button>
+		<hr>
+	</div>
+	
+	<div id="form" align="center" style="display: none;" >
+		<form id="myForm" method="get" onsubmit="salvar(this); return false;">
+			<label for="titulo">Título:</label>
+			<input type="text" id="titulo">
+			
+			<label for="descricao">Descrição:</label>
+			<input type="text" id="descricao" >
+			
+			<label for="responsavel">Responsável:</label>
+			<input type="text" id="responsavel" >
+			
+			<label for="prazo">Prazo:</label>
+			<input type="date" id="prazo" >
+			
+			<input type="submit" value="Cadastrar">
+		</form>
+		
+		<hr>
+	</div>
+		
+	<div  id="conteudo">
+		<p>Nenhuma tarefa cadastrada!</p>
+	</div>
+
+	<div align="center">
+		<hr>
+		<p>Sistema de Desenvolvimento WEB I - Prof. Jair Cavalcanti - Desenvolvido por Emanoel Dantas - 20170069630 </p>
+	</div>
+
 	<script type="text/javascript">
 	
 		var tarefas = [];
@@ -46,54 +85,42 @@
 			var d1 = document.getElementById("descricao").value;
 			var r1 = document.getElementById("responsavel").value;
 			var p1 = document.getElementById("prazo").value;
-			
+
+			if(t1.trim() == ""){
+				alert("Título inválido!");
+				return false;
+			}
+
+			if(d1.trim() == ""){
+				alert("Descrição inválida!");
+				return false;
+			}
+
+			if(r1.trim() == ""){
+				alert("Responsável inválido!");
+				return false;
+			} 
+
+			if(p1.trim() == ""){
+				alert("Prazo inválido!");
+				return false;
+			}
+
 			var tarefa = {titulo:t1, descricao:d1, responsavel:r1, prazo:p1};
 			
 			tarefas[n_tarefas] = tarefa;
 			n_tarefas++;
 			
 			atualizar();
-			
 			document.getElementById("form").style.display = "none";
+			document.getElementById("titulo").value = "";
+			document.getElementById("descricao").value = "";
+			document.getElementById("responsavel").value = "";
+			document.getElementById("prazo").value = "";
+
 		}
 
 	</script>
-
-</head>
-
-<body>
-	
-	<div align="center">
-		<h1>Lista de Tarefas</h1>
-		<button onclick="inserir()">Nova Tarefa</button>
-		<hr>
-	</div>
-	
-	<div id="form" style="display: none">
-		<label for="titulo">Título:</label>
-		<input type="text" id="titulo">
-		
-		<label for="descricao">Descrição:</label>
-		<input type="text" id="descricao">
-		
-		<label for="responsavel">Responsável:</label>
-		<input type="text" id="responsavel">
-		
-		<label for="prazo">Prazo:</label>
-		<input type="date" id="prazo">
-		
-		<button onclick="salvar()">Cadastrar</button>
-		<hr>
-	</div>
-		
-	<div  id="conteudo">
-		<p>Nenhuma tarefa cadastrada!</p>
-	</div>
-
-	<div align="center">
-		<hr>
-		<p>Sistema de Desenvolvimento WEB I - Prof. Jair Cavalcanti - Desenvolvido por Emanoel Dantas - 20170069630 </p>
-	</div>
 
 </body>
 </html>
