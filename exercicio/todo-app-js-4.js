@@ -1,19 +1,23 @@
 // by Franklyn https://codepen.io/franklynroth/pen/ZYeaBd
-var taskInput=document.getElementById("new-task");//Add a new task.
+var atividade=document.getElementById("atividade");//Add a new task.
+var responsavel=document.getElementById("responsavel");//Add a new task.
+var prazo=document.getElementById("prazo");//Add a new task.
 var addButton=document.getElementsByTagName("button")[0];//first button
 var incompleteTaskHolder=document.getElementById("incomplete-tasks");//ul of #incomplete-tasks
 var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
 
 
 //New task list item
-var createNewTaskElement=function(taskString){
+var createNewTaskElement=function(atv, rspv, prz){
 
 	var listItem=document.createElement("li");
 
 	//input (checkbox)
 	var checkBox=document.createElement("input");//checkbx
 	//label
-	var label=document.createElement("label");//label
+	var labelAtividade=document.createElement("label");//label
+	var labelResponsavel=document.createElement("label");//label
+	var labelPrazo=document.createElement("label");//label
 	//input (text)
 	//var editInput=document.createElement("input");//text
 	//button.edit
@@ -22,7 +26,9 @@ var createNewTaskElement=function(taskString){
 	//button.delete
 	var deleteButton=document.createElement("button");//delete button
 
-	label.innerText=taskString;
+	labelAtividade.innerText=atv;
+	labelResponsavel.innerText=rspv;
+	labelPrazo.innerText=prz;
 
 	//Each elements, needs appending
 	checkBox.type="checkbox";
@@ -30,12 +36,14 @@ var createNewTaskElement=function(taskString){
 
 	editButton.innerText="Editar";//innerText encodes special characters, HTML does not.
 	editButton.className="edit";
-	deleteButton.innerText="x";
+	deleteButton.innerText="Remover";
 	deleteButton.className="delete";
 
 	//and appending.
 	listItem.appendChild(checkBox);
-	listItem.appendChild(label);
+	listItem.appendChild(labelAtividade);
+	listItem.appendChild(labelResponsavel);
+	listItem.appendChild(labelPrazo);
 	//listItem.appendChild(editInput);
 	listItem.appendChild(editButton);
 	listItem.appendChild(deleteButton);
@@ -45,15 +53,19 @@ var createNewTaskElement=function(taskString){
 var addTask=function(){
 	console.log("Add Task...");
 	
-	if(taskInput.value.trim() != ""){
+	if(atividade.value.trim() != "" && responsavel.value.trim() != "" && prazo.value.trim() != ""){
 		//Create a new list item with the text from the #new-task:
-		var listItem=createNewTaskElement(taskInput.value);
+		var listItem=createNewTaskElement(atividade.value);
 		
 		//Append listItem to incompleteTaskHolder
 		incompleteTaskHolder.appendChild(listItem);
 		bindTaskEvents(listItem, taskCompleted);
+		atividade.value="";
+		responsavel.value="";
+		prazo.value="";
+	}else{
+		alert("Campo vazio!");
 	}
-	taskInput.value="";
 
 }
 
@@ -63,7 +75,7 @@ var editTask=function(){
 	var listItem=this.parentNode;
 	
 	var element = listItem.querySelector("label");
-	taskInput.value = element.innerText;
+	atividade.value = element.innerText;
 }
 /*var editTask=function(){
 	console.log("Edit Task...");

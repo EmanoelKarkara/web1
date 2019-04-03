@@ -9,10 +9,31 @@
 	<div class="container" align="center">
 	
 		<h1>Lista de Tarefas</h1>	
-		<p><input id="new-task" type="text" placeholder="Digite aqui" required="required"><button>+</button></p><hr>
+		<div>
+			<input id="atividade" type="text" placeholder="Atividade">
+			<input id="responsavel" type="text" placeholder="Responsável">
+			<input id="prazo" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  placeholder="Prazo">
+			<button>Salvar</button>
+		</div>
+		<hr>
 		
 		<h2>Para fazer:</h2>
-		<ul id="incomplete-tasks"></ul>
+		<table id="incomplete-tasks" style="width:100%" border="1">
+	  		<tr style='background-color: #f1a1a1'>
+	  			<th align="center" colspan="4">Para Fazer:</th>
+	  		</tr>
+	  		<tr style='background-color: #f1f1c1'>
+			  	<th align='left'>Atividade</th>
+			   	<th align='left'>Responsável</th>
+			   	<th align='left'>Prazo</th>
+			   	<th align='center'>Opções</th>
+		  	</tr>
+		  	<tr>
+		  		<td align="center" colspan="4">Nenhuma tarefa!</td>
+		  	</tr>
+		 </table> 	
+		 
+		<!-- <ul id="incomplete-tasks"></ul> --> <hr>
 		
 		<h2>Feito:</h2>
 		<ul id="completed-tasks"></ul>
