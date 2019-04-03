@@ -37,7 +37,33 @@
 	</div>
 		
 	<div  id="conteudo">
-		<p>Nenhuma tarefa cadastrada!</p>
+		<table id="incompletas" style="width:100%">
+	  		<tr style='background-color: #FF0000'>
+	  			<th align="center" colspan="4">Para Fazer:</th>
+	  		</tr>
+	  		<tr style='background-color: #f1f1c1'>
+			  	<th align='left'>Atividade</th>
+			   	<th align='left'>Responsável</th>
+			   	<th align='left'>Prazo</th>
+			   	<th align='left'>Opções</th>
+		  	</tr>
+		  	
+	 	</table> 	
+	 	
+	 	<br><br><br>
+	 	
+		<table id="completas" style="width:100%" >
+	  		<tr style='background-color: #00FF00'>
+	  			<th align="center" colspan="4">Feito:</th>
+	  		</tr>
+	  		<tr style='background-color: #f1f1c1'>
+			  	<th align='left'>Atividade</th>
+			   	<th align='left'>Responsável</th>
+			   	<th align='left'>Prazo</th>
+			   	<th align='left'>Opções</th>
+		  	</tr>
+		 </table>		 
+
 	</div>
 
 	<div align="center">
@@ -56,6 +82,9 @@
 		
 		function atualizar(){
 			var html = "<table style='width:100%'>"+
+							"<tr style='background-color: #FF0000'>"+
+  								"<th align='center' colspan='5'>Para Fazer:</th>"+
+  							"</tr>"+
 					  		"<tr style='background-color: #f1f1c1'>"+
 							   "<th align='left'>Título</th>"+
 							   "<th align='left'>Descrição</th>"+ 
