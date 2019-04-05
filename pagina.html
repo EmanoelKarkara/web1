@@ -80,20 +80,24 @@
 			document.getElementById("form").style.display = "block";
 		}
 		
-		function atualizar(){
-			var html = "<table style='width:100%'>"+
-							"<tr style='background-color: #FF0000'>"+
-  								"<th align='center' colspan='5'>Para Fazer:</th>"+
-  							"</tr>"+
-					  		"<tr style='background-color: #f1f1c1'>"+
-							   "<th align='left'>Título</th>"+
-							   "<th align='left'>Descrição</th>"+ 
-							   "<th align='left'>Responsável</th>"+
-							   "<th align='left'>Prazo</th>"+
-							   "<th align='left'>Opções</th>"+
-						  	"</tr>";
-
-		  	for(var i = 0; i < tarefas.length; i++) {
+		function titulo_table(cor){
+			return "<table style='width:100%'>"+
+						"<tr style='background-color: "+cor+";'>"+
+							"<th align='center' colspan='5'>Para Fazer:</th>"+
+						"</tr>"+
+				  		"<tr style='background-color: #f1f1c1'>"+
+						   "<th align='left'>Título</th>"+
+						   "<th align='left'>Descrição</th>"+ 
+						   "<th align='left'>Responsável</th>"+
+						   "<th align='left'>Prazo</th>"+
+						   "<th align='left'>Opções</th>"+
+					  	"</tr>";
+		}
+		function corpo_table(){
+			
+			var html = "";
+			
+			for(var i = 0; i < tarefas.length; i++) {
 		  		var linha = "<tr>";
 		  		linha += "<td>" + tarefas[i]["titulo"] + "</td>";
 		  		linha += "<td>" + tarefas[i]["descricao"] + "</td>";
@@ -103,8 +107,19 @@
 		  		linha += "</tr>";
 		  		html += linha;
 		  	}
-		  	html += "</table>"
+		  	html += "</table>";
+			return html;
+		}
+		
+		function atualizar(){
+			var html = titulo_table("#FF0000");
+
+		  	html += corpo_table();
 			
+		  	html += titulo_table("#00FF00");
+		  	
+		  	html += corpo_table();
+		  	
 			document.getElementById("conteudo").innerHTML = html;
 			
 		}
