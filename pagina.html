@@ -75,15 +75,18 @@
 	
 		var tarefas = [];
 		var n_tarefas = 0;
+		
+		var tarefas_feitas = [];
+		var n_tarefas_feitas = 0;
 	
 		function inserir(){
 			document.getElementById("form").style.display = "block";
 		}
 		
-		function titulo_table(cor){
+		function titulo_table(cor, tipo){
 			return "<table style='width:100%'>"+
 						"<tr style='background-color: "+cor+";'>"+
-							"<th align='center' colspan='5'>Para Fazer:</th>"+
+							"<th align='center' colspan='5'>"+tipo+":</th>"+
 						"</tr>"+
 				  		"<tr style='background-color: #f1f1c1'>"+
 						   "<th align='left'>Título</th>"+
@@ -93,34 +96,56 @@
 						   "<th align='left'>Opções</th>"+
 					  	"</tr>";
 		}
-		function corpo_table(){
+		function corpo_table(feitas){
 			
 			var html = "";
 			
-			for(var i = 0; i < tarefas.length; i++) {
-		  		var linha = "<tr>";
-		  		linha += "<td>" + tarefas[i]["titulo"] + "</td>";
-		  		linha += "<td>" + tarefas[i]["descricao"] + "</td>";
-		  		linha += "<td>" + tarefas[i]["responsavel"] + "</td>";
-		  		linha += "<td>" + tarefas[i]["prazo"] + "</td>";
-		  		linha += "<td><button>Alterar</button><button>Remover</button></td>";
-		  		linha += "</tr>";
-		  		html += linha;
-		  	}
+			if(feitas){
+				for(var i = 0; i < tarefas_feitas.length; i++) {
+			  		var linha = "<tr>";
+			  		linha += "<td>" + tarefas_feitas[i]["titulo"] + "</td>";
+			  		linha += "<td>" + tarefas_feitas[i]["descricao"] + "</td>";
+			  		linha += "<td>" + tarefas_feitas[i]["responsavel"] + "</td>";
+			  		linha += "<td>" + tarefas_feitas[i]["prazo"] + "</td>";
+			  		linha += "<td><button onclick='alterar("+i+",true)'>Alterar</button><button onclick='remover("+i+",true)'>Remover</button><button onclick='finalizar("+i+",true)'>Reabrir</button></td>";
+			  		linha += "</tr>";
+			  		html += linha;
+			  	}
+			}else{
+				for(var i = 0; i < tarefas.length; i++) {
+			  		linha = "<tr>";
+			  		linha += "<td>" + tarefas[i]["titulo"] + "</td>";
+			  		linha += "<td>" + tarefas[i]["descricao"] + "</td>";
+			  		linha += "<td>" + tarefas[i]["responsavel"] + "</td>";
+			  		linha += "<td>" + tarefas[i]["prazo"] + "</td>";
+			  		linha += "<td><button onclick='alterar("+i+",false)'>Alterar</button><button onclick='remover("+i+",false)'>Remover</button><button onclick='finalizar("+i+",false)'>Finalizar</button></td>";
+			  		linha += "</tr>";
+			  		html += linha;
+			  	}
+			}
+			
 		  	html += "</table>";
 			return html;
 		}
 		
-		function atualizar(){
-			var html = titulo_table("#FF0000");
-
-		  	html += corpo_table();
+		function atualizar(editar){
 			
-		  	html += titulo_table("#00FF00");
-		  	
-		  	html += corpo_table();
-		  	
-			document.getElementById("conteudo").innerHTML = html;
+			if(editar){
+				document.getElementById("conteudo").innerHTML = "";
+			}else{
+				var html = titulo_table("#FF0000", "Para fazer");
+
+			  	html += corpo_table(false);
+				
+			  	html += "<br><br><br>";
+			  	
+			  	html += titulo_table("#00FF00", "Feito");
+			  	
+			  	html += corpo_table(true);
+			  	
+				document.getElementById("conteudo").innerHTML = html;
+			}
+			
 			
 		}
 		
@@ -155,7 +180,7 @@
 			tarefas[n_tarefas] = tarefa;
 			n_tarefas++;
 			
-			atualizar();
+			atualizar(false);
 			document.getElementById("form").style.display = "none";
 			document.getElementById("titulo").value = "";
 			document.getElementById("descricao").value = "";
@@ -164,6 +189,61 @@
 
 		}
 
+		function remover(indice, feitas){
+			
+			if(feitas){
+				tarefas_feitas.splice(indice, 1);
+				n_tarefas_feitas--;
+
+			}else{
+				tarefas.splice(indice, 1);
+				n_tarefas--;
+			}
+
+			atualizar(false);
+			
+		}
+		
+		function finalizar(indice, feitas){
+			
+			if(feitas){
+				tarefas[n_tarefas] = tarefas_feitas[indice];
+				n_tarefas++;
+				remover(indice,true);
+			}else{
+				tarefas_feitas[n_tarefas_feitas] = tarefas[indice];
+				n_tarefas_feitas++;
+				remover(indice,false);
+			}
+			
+			atualizar(false);
+		}
+		
+		function alterar(indice, feitas){
+			
+			document.getElementById("form").style.display = "block";
+			atualizar(true);
+
+			if(feitas){
+				document.getElementById("titulo").value = tarefas_feitas[indice]["titulo"];
+				document.getElementById("descricao").value = tarefas_feitas[indice]["descricao"];
+				document.getElementById("responsavel").value = tarefas_feitas[indice]["responsavel"];
+				document.getElementById("prazo").value = tarefas_feitas[indice]["prazo"];
+				
+				tarefas_feitas.splice(indice, 1);
+				n_tarefas_feitas--;
+			}else{
+				document.getElementById("titulo").value = tarefas[indice]["titulo"];
+				document.getElementById("descricao").value = tarefas[indice]["descricao"];
+				document.getElementById("responsavel").value = tarefas[indice]["responsavel"];
+				document.getElementById("prazo").value = tarefas[indice]["prazo"];
+
+				tarefas.splice(indice, 1);
+				n_tarefas--;
+			}
+			
+		}
+		
 	</script>
 
 </body>
