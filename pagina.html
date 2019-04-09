@@ -74,10 +74,8 @@
 	<script type="text/javascript">
 	
 		var tarefas = []; 	//Armazena as tarefas "Para fazer" 
-		var n_tarefas = 0;	//Número de tarefas "Para fazer"
 		
 		var tarefas_feitas = [];	//Armazena as tarefas "Feito" 
-		var n_tarefas_feitas = 0;	//Número de tarefas "Feito"
 	
 		//Exibe o form de cadastro de tarefas
 		function inserir(){
@@ -187,8 +185,7 @@
 			var tarefa = {titulo:t1, descricao:d1, responsavel:r1, prazo:p1};
 			
 			//Adiciona a tarefa na lista de "Para fazer"
-			tarefas[n_tarefas] = tarefa;
-			n_tarefas++;
+			tarefas.push(tarefa);
 			
 			atualizar(false);
 			
@@ -206,11 +203,8 @@
 			
 			if(feitas){
 				tarefas_feitas.splice(indice, 1);
-				n_tarefas_feitas--;
-
 			}else{
 				tarefas.splice(indice, 1);
-				n_tarefas--;
 			}
 
 			atualizar(false);
@@ -221,12 +215,10 @@
 		function finalizar(indice, feitas){
 			
 			if(feitas){
-				tarefas[n_tarefas] = tarefas_feitas[indice];
-				n_tarefas++;
+				tarefas.push(tarefas_feitas[indice]);
 				remover(indice,true);
 			}else{
-				tarefas_feitas[n_tarefas_feitas] = tarefas[indice];
-				n_tarefas_feitas++;
+				tarefas_feitas.push(tarefas[indice]);
 				remover(indice,false);
 			}
 			
@@ -246,7 +238,6 @@
 				document.getElementById("prazo").value = tarefas_feitas[indice]["prazo"];
 				
 				tarefas_feitas.splice(indice, 1);
-				n_tarefas_feitas--;
 			}else{
 				document.getElementById("titulo").value = tarefas[indice]["titulo"];
 				document.getElementById("descricao").value = tarefas[indice]["descricao"];
@@ -254,7 +245,6 @@
 				document.getElementById("prazo").value = tarefas[indice]["prazo"];
 
 				tarefas.splice(indice, 1);
-				n_tarefas--;
 			}
 			
 		}
