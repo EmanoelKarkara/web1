@@ -15,9 +15,35 @@
 ?>
 
 <!DOCTYPE	html>
-<html lang="en">
+<html>
+<head>
+    <style type="text/css">
+        body {
+            background-color: lightblue;
+        }
+        div{
+            border: 2px solid;
+            border-radius: 10px;
+            margin: 100px auto;
+            width: 40%;
+            text-align: center;
+        }
+        input, button{
+            border: 1px solid;
+            border-radius: 5px;
+            text-align: center;
+            background-color: white;
+        }
+        h1{
+            font-family: "Arial", Times, serif;
+            color: blue;
+        }
+
+    </style>
+</head>
+
 <body>
-    <div id="page" align="center" style="border: solid 1px; width: 40%; margin: auto;">
+    <div id="page">
         <h1>Cadastre-se</h1>
         <form id="login" method="post">
             <input id="username" name="username" type="text" placeholder="Usuário" required><br><br>

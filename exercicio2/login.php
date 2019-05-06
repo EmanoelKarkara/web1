@@ -40,10 +40,33 @@
 <!DOCTYPE	html>
 <html>
 <head>
+    <style type="text/css">
+        body {
+            background-color: lightblue;
+        }
+        div{
+            border: 2px solid;
+            border-radius: 10px;
+            margin: 100px auto;
+            width: 40%;
+            text-align: center;
+        }
+        input, button{
+            border: 1px solid;
+            border-radius: 5px;
+            text-align: center;
+            background-color: white;
+        }
+        h1{
+            font-family: "Arial", Times, serif;
+            color: blue;
+        }
+
+    </style>
 </head>
 <body>
 
-    <div align="center" style="border: solid 1px; width: 40%; margin: auto;">
+    <div>
         <h1>Login</h1>
         <?php echo $errormsg;?>
         <form id="login" method="post">

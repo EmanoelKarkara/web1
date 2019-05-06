@@ -8,11 +8,46 @@
 <head>
 	<title>Tarefas</title>
 	<meta charset="UTF-8">
+    <style type="text/css">
+        body {
+            background-color: lightblue;
+        }
+        #bem_vindo{
+            border: 2px solid;
+            border-radius: 10px;
+            margin: auto;
+            width: 40%;
+            text-align: center;
+        }
+        input, button{
+            border: 1px solid;
+            border-radius: 5px;
+            text-align: center;
+            background-color: white;
+        }
+        h1{
+            font-family: "Arial", Times, serif;
+            color: blue;
+        }
+        #incompletas{
+            background-color: red;
+        }
+        #completas{
+            background-color: green;
+        }
+        #titulos{
+            background-color: lightgray;
+        }
+        table{
+            width: 100%;
+        }
+
+    </style>
 </head>
 
 <body>
 
-    <div align="center" style="border: solid 1px; width: 40%; margin: auto;">
+    <div id="bem_vindo" >
         <h1>Bem vindo,	<?php echo $_SESSION["user"]."!";?></h1>
         <button onclick="window.location.href='login.php'">Sair</button>
         <br><br>
@@ -45,11 +80,11 @@
 	</div>
 
 	<div  id="conteudo">
-		<table id="incompletas" style="width:100%">
-	  		<tr style='background-color: #FF0000'>
+		<table>
+	  		<tr id="incompletas">
 	  			<th align="center" colspan="4">Para Fazer:</th>
 	  		</tr>
-	  		<tr style='background-color: #f1f1c1'>
+	  		<tr id="titulos">
 			  	<th align='left'>Atividade</th>
 			   	<th align='left'>Responsável</th>
 			   	<th align='left'>Prazo</th>
@@ -60,11 +95,11 @@
 
 	 	<br><br><br>
 
-		<table id="completas" style="width:100%" >
-	  		<tr style='background-color: #00FF00'>
+		<table>
+	  		<tr id="completas">
 	  			<th align="center" colspan="4">Feito:</th>
 	  		</tr>
-	  		<tr style='background-color: #f1f1c1'>
+	  		<tr id="titulos">
 			  	<th align='left'>Atividade</th>
 			   	<th align='left'>Responsável</th>
 			   	<th align='left'>Prazo</th>
@@ -96,7 +131,7 @@
 						"<tr style='background-color: "+cor+";'>"+
 							"<th align='center' colspan='5'>"+tipo+":</th>"+
 						"</tr>"+
-				  		"<tr style='background-color: #f1f1c1'>"+
+				  		"<tr style='background-color: lightgray'>"+
 						   "<th align='left'>Título</th>"+
 						   "<th align='left'>Descrição</th>"+
 						   "<th align='left'>Responsável</th>"+
@@ -145,13 +180,13 @@
 			if(alterar){
 				document.getElementById("conteudo").innerHTML = "";
 			}else{
-				var html = titulo_table("#FF0000", "Para fazer");
+				var html = titulo_table("red", "Para fazer");
 
 			  	html += corpo_table(false);
 
 			  	html += "<br><br><br>";
 
-			  	html += titulo_table("#00FF00", "Feito");
+			  	html += titulo_table("green", "Feito");
 
 			  	html += corpo_table(true);
 
